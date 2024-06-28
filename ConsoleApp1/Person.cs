@@ -38,7 +38,14 @@ namespace ConsoleApp1
             double height = Convert.ToDouble(Console.ReadLine()) * 2.54; // Convert inches to centimeters
             Console.Write("How much do you weigh in pounds?: ");
             double weight = Convert.ToDouble(Console.ReadLine()) * 0.453592; // Convert pounds to kilograms
-            Console.Write("What is your activity level (1-6)?: ");
+            Console.Write("What is your activity level?\n\n " +
+                "1. Sedentary(little or no exercise)\n " +
+                "2. Lightly active(light exercise/ sports 1 - 3 days / week)\n " +
+                "3. Moderately active(moderate exercise/ sports 4 - 5 days / week)" +"\n " +
+                "4. Very active(hard exercise/ sports 6 - 7 days a week)\n " +
+                "5. Extra active(very hard exercise/ physical job & exercise daily)\n " +
+                "6. Intense exercise(very intense exercise daily or 2x / day & physical job\n\n" +
+                " Please enter a number: ");
             int activity = Convert.ToInt32(Console.ReadLine());
 
             return new Person(name, age, height, weight, activity);
@@ -52,13 +59,27 @@ namespace ConsoleApp1
             return Math.Round(maintain, MidpointRounding.AwayFromZero);
         }
 
-        public void DisplayCalorieGoals()
+        public void PersonStats()
+        {
+            double tdee = CalculateTDEE();
+            Console.WriteLine("Name: " + Name);
+            Console.WriteLine("Age: " + Age);
+            Console.WriteLine("Height: " + Height);
+            Console.WriteLine("Weight: " + Weight);
+            Console.WriteLine($"Maintenance Calories: {tdee:N2} kcal/day");
+            Console.WriteLine($"Mild Weight Loss (0.5 lb/week): {tdee * 0.93:N2} kcal/day");
+            Console.WriteLine($"Weight Loss (1 lb/week): {tdee * 0.85:N2} kcal/day");
+            Console.WriteLine($"Extreme Weight Loss (2 lb/week): {tdee * 0.71:N2} kcal/day");
+            
+        }
+
+        public void CalorieGoals()
         {
             double tdee = CalculateTDEE();
             Console.WriteLine($"Maintenance Calories: {tdee:N2} kcal/day");
             Console.WriteLine($"Mild Weight Loss (0.5 lb/week): {tdee * 0.93:N2} kcal/day");
             Console.WriteLine($"Weight Loss (1 lb/week): {tdee * 0.85:N2} kcal/day");
-            Console.WriteLine($"Extreme Weight Loss (2 lb/week): {tdee * 0.71:N2} kcal/day");
+            Console.WriteLine($"Extreme Weight Loss (2 lb/week): {tdee * 0.71:N2} kcal/day\n");
         }
     }
 }

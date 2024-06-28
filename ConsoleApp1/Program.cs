@@ -19,30 +19,31 @@ namespace ConsoleApp1
                 Person existingPerson = people.FirstOrDefault(p => p.Name.Equals(input, StringComparison.OrdinalIgnoreCase));
                 if (existingPerson != null)
                 {
-                    // If person is found, display their information
+                    
                     Console.WriteLine("Person found in the system:");
-                    existingPerson.DisplayCalorieGoals();
+                    existingPerson.PersonStats();
                 }
-                else
+                else 
                 {
-                    // If person is not found, prompt for more details
+                 
                     Console.WriteLine("No such person found, let's add a new one.");
                     Person newPerson = Person.Dialogue();
+                    Console.WriteLine("Here are your results: ");
+                    newPerson.CalorieGoals();
                     Console.Write("Would you like to save this person's information? (yes/no): ");
                     if (Console.ReadLine().ToLower() == "yes")
                     {
                         people.Add(newPerson);
                         Console.WriteLine("Person's information saved.");
                     }
-                    newPerson.DisplayCalorieGoals();
+                    newPerson.PersonStats();
                 }
 
-                // Ask user if they want to continue
                 Console.Write("Would you like to continue adding people? (yes/no): ");
                 string continueAdding = Console.ReadLine();
                 if (continueAdding.ToLower() != "yes")
                 {
-                    break;  // Exit the loop if the user does not want to continue
+                    break;  
                 }
             }
         }
